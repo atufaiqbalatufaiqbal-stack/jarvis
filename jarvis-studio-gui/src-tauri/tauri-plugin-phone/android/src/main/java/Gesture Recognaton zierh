@@ -1,0 +1,83 @@
+import java.util.List;
+
+public class GestureRecognition {
+
+    public enum Gesture {
+        OPEN_PALM,
+        PEACE,
+        THUMBS_UP,
+        FIST,
+        UNKNOWN
+    }
+
+    public static class Landmark {
+        public float x;
+        public float y;
+        public float z;
+
+        public Landmark(float x, float y, float z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
+    public static Gesture recognize(List<Landmark> hand) {
+
+        if (hand == null || hand.size() < 21) {
+            return Gesture.UNKNOWN;
+        }
+
+        Landmark wrist = hand.get(0);
+
+        boolean thumb = hand.get(4).y < hand.get(3).y;
+        boolean index = hand.get(8).y < hand.get(6).y;
+        boolean middle = hand.get(12).y < hand.get(10).y;
+        boolean ring = hand.get(16).y < hand.get(14).y;
+        boolean pinky = hand.get(20).y < hand.get(18).y;
+
+        // Open palm
+        if (index && middle && ring && pinky) {
+            return Gesture.OPEN_PALM;
+        }
+
+        // Peace sign
+        if (index && middle && !ring && !pinky) {
+            return Gesture.PEACE;
+        }
+
+        // Thumbs up
+        if (thumb && !index && !middle && !ring && !pinky
+                && hand.get(4).y < wrist.y) {
+            return Gesture.THUMBS_UP;
+        }
+
+        // Closed fist
+        if (!index && !middle && !ring && !pinky) {
+            return Gesture.FIST;
+        }
+
+        return Gesture.UNKNOWN;
+    }
+
+    public static String getJarvisResponse(Gesture gesture) {
+
+        switch (gesture) {
+
+            case OPEN_PALM:
+                return "Hello. I can see your hand.";
+
+            case PEACE:
+                return "Peace gesture detected.";
+
+            case THUMBS_UP:
+                return "Approval confirmed.";
+
+            case FIST:
+                return "Closed fist detected.";
+
+            default:
+                return "Gesture not recognized.";
+        }
+    }
+}
