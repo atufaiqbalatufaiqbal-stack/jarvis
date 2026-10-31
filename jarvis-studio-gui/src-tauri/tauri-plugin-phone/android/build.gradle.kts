@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
+implementation("com.google.mediapipe:tasks-vision:latest.release")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("androidx.room:room-runtime:2.6.1")
