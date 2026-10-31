@@ -26,6 +26,14 @@ android {
 }
 
 dependencies {
+// MediaPipe hand tracking
+implementation("com.google.mediapipe:tasks-vision:0.10.14")
+
+// CameraX
+implementation("androidx.camera:camera-core:1.4.2")
+implementation("androidx.camera:camera-camera2:1.4.2")
+implementation("androidx.camera:camera-lifecycle:1.4.2")
+implementation("androidx.camera:camera-view:1.4.2")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
